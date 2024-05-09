@@ -1,15 +1,13 @@
-function countSubstrings(s) {
-  let count = 0;
-  for (let i = 0; i < s.length; i++) {
-    extendPalindrome(i, i);
-    extendPalindrome(i, i + 1);
+function searchMatrix(matrix, target) {
+  if (matrix.length === 0 || matrix[0].length === 0) return false;
+  const rows = matrix.length;
+  const cols = matrix[0].length;
+  let row = 0;
+  let col = cols - 1;
+  while (row < rows && col >= 0) {
+    if (matrix[row][col] === target) return true;
+    else if (matrix[row][col] < target) row++;
+    else col--;
   }
-  return count;
-  function extendPalindrome(left, right) {
-    while (left >= 0 && right < s.length && s[left] === s[right]) {
-      count++;
-      left--;
-      right++;
-    }
-  }
+  return false;
 }
