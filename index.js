@@ -1,12 +1,17 @@
-function lengthOfLongestSubstring(s) {
-  if (s.length === 0) return 0;
-  const map = new Map();
-  let maxLength = 0;
-  let left = 0;
-  for (let right = 0; right < s.length; right++) {
-    if (map.has(s[right])) left = Math.max(left, map.get(s[right]) + 1);
-    map.set(s[right], right);
-    maxLength = Math.max(maxLength, right - left + 1);
+function combinationSum(candidates, target) {
+  const result = [];
+  backtrack([], 0, 0);
+  return result;
+  function backtrack(combination, start, sum) {
+    if (sum === target) {
+      result.push([...combination]);
+      return;
+    }
+    if (sum > target) return;
+    for (let i = start; i < candidates.length; i++) {
+      combination.push(candidates[i]);
+      backtrack(combination, i, sum + candidates[i]);
+      combination.pop();
+    }
   }
-  return maxLength;
 }
